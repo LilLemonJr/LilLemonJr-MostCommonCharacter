@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 
 public class MostCommonCharacter {
     /**
@@ -8,6 +10,22 @@ public class MostCommonCharacter {
      * @return the most common character within str.
      */
     public char recurringChar(String str) {
-        return ' ';
+        
+        // create HashMap and traverse through string to fill charFrequencies
+	    Map<Character, Integer> charFrequencies = new HashMap<>();
+	    for (char c : str.toCharArray()) {
+		    charFrequencies.put(c, charFrequencies.getOrDefault(c, 0) + 1);
+	    }
+
+	    // Find the character with the highest frequency
+	    char mostCommon = ' ';
+	    int maxFrequency = 0;
+	    for (Map.Entry<Character, Integer> entry : charFrequencies.entrySet()) {
+		    if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostCommon = entry.getKey();
+		    }
+	    }
+        return mostCommon;
     }
 }
